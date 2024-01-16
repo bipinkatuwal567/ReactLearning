@@ -1,0 +1,45 @@
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body{
+  display: flex;
+  justify-content: center;
+}
+
+.container{
+  margin-top: 25px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px 0;
+  width: 100%;
+}
+
+.counter{
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 15px;
+}
+
+.counter button{
+  padding: .4rem 1rem;
+  border: none;
+  font-size: 18px;
+  font-weight: bold;
+  color: white;
+  background-color: rgb(10, 137, 255);
+  transition: all .1s ease-in;
+}
+
+.counter button:hover{
+  background-color: rgb(0, 115, 222);
+}
+
+.page p{
+  font-size: 18px;
+  margin-top: 25px;
+}

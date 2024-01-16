@@ -1,0 +1,62 @@
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body{
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+}
+
+.container{
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  margin-top: 25px;
+  /* background-color: red; */
+  padding: 1rem 2rem;
+}
+
+.range, .count, .content, .reset{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.range{
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.range input{
+  width: 80%;
+  margin-right: 5px;
+}
+
+.count{
+  margin-top: 5px;
+}
+
+.count button, input{
+  padding: .3rem .6rem;
+  outline: none;
+  font-size: 16px;
+  border-radius: 4px;
+}
+
+.content{
+  margin: 20px 0;
+  font-size: 20px;
+  font-weight: 600;
+}
+
+button{
+  padding: .2rem .6rem;
+  border: 2px solid gray;
+  border-radius: 4px;
+  font-size: 16px;
+}
+
