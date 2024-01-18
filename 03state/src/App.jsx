@@ -12,13 +12,15 @@ function App() {
   const [isOpen, setIsOpen] = useState(true);
 
   function handleClick(e){
-    if(e.target.innerText === "Next"){
+    console.log(e);
+    if(e.target.innerHTML === "Next<span>👉</span>"){
       if(step < 3){
         setStep(step => step + 1);
       }
     }
 
-    if(e.target.innerText === "Prev"){
+    if(e.target.innerHTML === "<span>👈</span>Prev"
+    ){
       if(step > 1){
         setStep(step => step - 1);
       }
@@ -41,18 +43,40 @@ function App() {
         <div className={step >= 2 ? "active" : ""}>2</div>
         <div className={step >= 3 ? "active" : ""}>3</div>
       </div>
-
-      <div className="message">
+      
+      <StepMessage step={step}>
         {messages[step-1]}
-      </div>
+      </StepMessage>
 
       <div className="buttons">
-        <button onClick={(e) => {handleClick(e)}} style={{backgroundColor: '#7950f2', color: "#fff"}}>Prev</button>
-        <button onClick={(e) => {handleClick(e)}} style={{backgroundColor: '#7950f2', color: "#fff"}}>Next</button>
+        <Button bgColor="#7950f2" textColor="#fff" handleClick={handleClick}><span>👈</span>Prev</Button>
+        <Button bgColor="#7950f2" textColor="#fff" handleClick={handleClick}>Next<span>👉</span></Button>
       </div>
     </div>
     }
     </>
+  )
+}
+
+function StepMessage({step,children}){
+  return(
+    <div className="message">
+      <h2>STEP : {step} </h2>
+      {
+        children
+      }
+    </div>
+  )
+}
+
+function Button({bgColor, textColor, handleClick, children}){
+  return(
+    <button style={{backgroundColor: bgColor, color: textColor}} 
+    onClick={(e) => handleClick(e)}>
+      {
+        children
+      }
+    </button>
   )
 }
 
