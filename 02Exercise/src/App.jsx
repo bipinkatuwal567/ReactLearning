@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { Children, useState } from "react";
 import "./index.css";
 
 const faqs = [
@@ -29,6 +29,7 @@ function App() {
 }
 
 function Accordion(){
+  const [isActive, setIsActive] = useState(null);
 
 
   return(
@@ -37,30 +38,34 @@ function Accordion(){
         faqs.map((faq, i) => 
         (
         <AccordionItem 
-          title={faq.title} 
-          text={faq.text} 
+          title={faq.title}  
           key={i} 
           num={i}
-        />))
+          onActive={setIsActive}
+          isActive={isActive}>
+            {
+              faq.text
+            }
+          </AccordionItem>))
       }
     </div>
   )
 }
 
-function AccordionItem({num, title, text}){
-  const [isActive, setIsActive] = useState(false);
+function AccordionItem({num, title, onActive, isActive, children}){
+  const active = num === isActive;
 
   function handleClick(){
-    setIsActive(isActive => !isActive);
+    onActive(active ? null : num);
   }
   return(
-    <div className={`item ${isActive ? "open" : ""}`} onClick={handleClick}>
+    <div className={`item ${active ? "open" : ""}`} onClick={handleClick}>
     <p className="number">{num < 9 ? `0${num+1}` : num+1}</p>
     <p className="title">{title}</p>
-    <p className="icon">{isActive ? "-" : "+"}</p>
+    <p className="icon">{active ? "-" : "+"}</p>
     {
-      isActive && 
-    <div className="content-box">{text}</div>
+      active && 
+    <div className="content-box">{children}</div>
     }
   </div>
   )

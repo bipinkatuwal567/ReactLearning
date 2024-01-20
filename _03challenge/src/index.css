@@ -1,0 +1,44 @@
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body{
+  height: 100vh;
+  width: 100%;
+}
+
+.container{
+  font-size: 18px;
+  padding: 1rem 2rem;
+}
+
+.input{
+  display: flex;
+  gap: 0 15px;
+}
+
+.input input, select{
+  padding: .2rem .8rem;
+  font-size: 14px;
+}
+
+form{
+  display: flex;
+  flex-direction: column;
+  gap: 10px 0;
+}
+.content{
+  margin-top: 25px;
+}
+
+.content button{
+  padding: .4rem 1rem;
+  border: none;
+  background-color: #3a61fd;
+  color: #fff;
+  margin-top: 15px;
+  font-size: 14px;
+  border-radius: 4px;
+}
