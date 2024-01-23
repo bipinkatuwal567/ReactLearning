@@ -1,35 +1,68 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+/* eslint-disable react/no-unescaped-entities */
+/* eslint-disable react/prop-types */
+import { useState } from "react";
+import "./index.css";
 
-function App() {
-  const [count, setCount] = useState(0)
-
+export default function App() {
   return (
-    <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+    <div>
+      <TextExpander>
+        Space travel is the ultimate adventure! Imagine soaring past the stars
+        and exploring new worlds. It's the stuff of dreams and science fiction,
+        but believe it or not, space travel is a real thing. Humans and robots
+        are constantly venturing out into the cosmos to uncover its secrets and
+        push the boundaries of what's possible.
+      </TextExpander>
+
+      <TextExpander
+        collapsedNumWords={20}
+        expandButtonText="Show text"
+        collapseButtonText="Collapse text"
+        buttonColor="#ff6622"
+      >
+        Space travel requires some seriously amazing technology and
+        collaboration between countries, private companies, and international
+        space organizations. And while it's not always easy (or cheap), the
+        results are out of this world. Think about the first time humans stepped
+        foot on the moon or when rovers were sent to roam around on Mars.
+      </TextExpander>
+
+      <TextExpander expanded={true} className="box">
+        Space missions have given us incredible insights into our universe and
+        have inspired future generations to keep reaching for the stars. Space
+        travel is a pretty cool thing to think about. Who knows what we'll
+        discover next!
+      </TextExpander>
+    </div>
+  );
 }
 
-export default App
+function TextExpander({
+    children,
+    collapseButtonText = "Show less",
+    expandButtonText = "Show more",
+    collapsedNumWords = 10,
+    buttonColor = "blue",
+    expanded = false,
+    className
+  }) {
+    const [expand, setExpand] = useState(expanded);
+
+    const buttonStyle = {
+      background: "none",
+      border: "none",
+      marginLeft: "5px",
+      color: buttonColor,
+      font: "inherit"
+    }
+
+    const displayText = expand ? children : children.split(" ").slice(0, collapsedNumWords).join(" ") + "...";
+  return (
+    <div className={expand ? "box" : className}>
+      <span>
+        {displayText}
+      </span>
+      <button style={buttonStyle} onClick={() => setExpand(expand => !expand)}>{expand ? collapseButtonText : expandButtonText}</button>
+    </div>
+  )
+}

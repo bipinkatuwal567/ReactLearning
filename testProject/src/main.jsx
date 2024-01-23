@@ -1,11 +1,10 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
-import StarRating from './StarRating'
+import App from './App'
 
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
-    <StarRating />
-    <StarRating maxRating={10} />
+    <App />
   </React.StrictMode>,
 )
