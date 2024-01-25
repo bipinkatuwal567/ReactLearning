@@ -49,13 +49,13 @@ function App() {
         </Button>
       </div>
         {
-          selectedFriend !== null && <FormSplitBill selectedFriend={selectedFriend} handleSplitBill={handleSplitBill} setSelectedFriend={setSelectedFriend} /> 
+          selectedFriend !== null && <FormSplitBill key={selectedFriend.id} selectedFriend={selectedFriend} handleSplitBill={handleSplitBill}/> 
         }
     </div>
   )
 }
 
-function FormSplitBill({selectedFriend, handleSplitBill, setSelectedFriend}){
+function FormSplitBill({selectedFriend, handleSplitBill}){
   const [billValue , setBillValue] = useState("");
   const [userExpense, setUserExpense] = useState("");
   const [whoIsPaying, setWhoIsPaying] = useState("you");
@@ -67,7 +67,8 @@ function FormSplitBill({selectedFriend, handleSplitBill, setSelectedFriend}){
     if(!billValue || !userExpense) return;
 
     handleSplitBill(whoIsPaying === "you" ? friendExpense : -userExpense);
-    setSelectedFriend(null);
+    setBillValue("");
+    setUserExpense("");
   }
 
   return(
