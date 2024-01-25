@@ -71,6 +71,17 @@ function TabContent({content}){
   const [like, setLike] = useState(0);
   const [showContent, setShowContent] = useState(true);
 
+  function handleUndo(){
+    setLike(0);
+    setShowContent(true);
+  }
+
+  function handleTimeUndo(){
+    setTimeout(() => {
+      handleUndo();
+    },2000)
+  }
+
   return(
     <div className='tab-content'>
       <h4>{content.summary}</h4>
@@ -88,8 +99,8 @@ function TabContent({content}){
       </div>
 
       <div className="tab-undo">
-        <button>Undo</button>
-        <button>Undo in 2s</button>
+        <button onClick={handleUndo}>Undo</button>
+        <button onClick={handleTimeUndo}>Undo in 2s</button>
       </div>
 
     </div>
