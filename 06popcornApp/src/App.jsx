@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Navbar from "./components/Navbar";
 import Search from "./components/Search";
 import NumResults from "./components/NumResults";
@@ -50,12 +50,43 @@ const tempWatchedData = [
   },
 ];
 
+
 const average = (arr) =>
 arr.reduce((acc, cur, i, arr) => acc + cur / arr.length, 0);
 
+const KEY = "4cbcc021";
+
 export default function App() {
-  const [movies, setMovies] = useState(tempMovieData);
-  const [watched, setWatched] = useState(tempWatchedData);
+  const [movies, setMovies] = useState([]);
+  const [watched, setWatched] = useState([]);
+  const [isLoader, setIsLoader] = useState(false);
+  const [error, setError] = useState("");
+  const query = "interstellar";
+
+  useEffect(() => {
+    async function fetchMovie(){
+      try{
+      setIsLoader(true);
+      const response = await fetch(`https://www.omdbapi.com/?apikey=${KEY}&s=${query}`);
+
+      if(!response.ok) throw new Error("Something went wrong");
+      
+      const data = await response.json();
+
+      if(data.Response === "False") throw new Error("Movie not found");
+
+      setMovies(data.Search);
+    }
+    catch (err){
+      console.log(err.message);
+      setError(err.message);
+    }
+    finally{
+        setIsLoader(false);
+      }
+    }
+    fetchMovie();
+  }, [])
 
   return (
     <>
@@ -66,7 +97,9 @@ export default function App() {
 
       <Main>
         <Box>
-          <MovieList movies={movies}/>
+          {isLoader && <Loader />}
+          {!isLoader && !error  && <MovieList movies={movies} />}
+          {error && <ErrorMessage message={error} />}
         </Box>
         <Box>
           <SummaryWatched watched={watched} />
@@ -75,6 +108,20 @@ export default function App() {
       </Main>
     </>
   );
+}
+
+function Loader(){
+  return(
+    <p className="loader">
+      Loading data..
+    </p>
+  )
+}
+
+function ErrorMessage({message}){
+  return(
+    <p className="loader"><span>⛔</span>{message}</p>
+  )
 }
 
 function Main({children}) {
