@@ -40,7 +40,7 @@ export default function StarRating (
         linespacing: "1",
         margin: "0",
         color,
-        fontSize: `${size} / 1.5px`
+        fontSize: `${size /1.5}px`
     }
 
     function handleRating(rating){
@@ -62,7 +62,7 @@ export default function StarRating (
                      />
                 ))}
             </div>
-            <p style={contentStyle}>{messages.length === maxRating ? messages[tempRating ? tempRating-1 : rating-1]: tempRating || rating || ""}</p>
+            <p style={contentStyle}> {messages.length === maxRating ? messages[tempRating ? tempRating-1 : rating-1]: tempRating || rating || ""}</p>
         </div>
     )
 }
