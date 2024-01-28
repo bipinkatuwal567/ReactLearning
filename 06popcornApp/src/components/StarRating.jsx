@@ -9,7 +9,8 @@ const containerStyle = {
 };
 
 const containerStarStyle = {
-    display: "flex"
+    display: "flex",
+    alignItems: "center",
 }
 
 StarRating.propTypes = {
@@ -40,7 +41,7 @@ export default function StarRating (
         linespacing: "1",
         margin: "0",
         color,
-        fontSize: `${size /1.5}px`
+        fontSize: `${size / 1.5}px`
     }
 
     function handleRating(rating){
