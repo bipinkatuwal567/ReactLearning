@@ -18,13 +18,15 @@ export default function App() {
   const [error, setError] = useState("");
 
   useEffect(() => {
+    const controller = new AbortController();
     async function fetchMovie() {
       try {
+
         setIsLoader(true);
         setError("");
 
         const response = await fetch(
-          `https://www.omdbapi.com/?apikey=${KEY}&s=${query}`
+          `https://www.omdbapi.com/?apikey=${KEY}&s=${query}`, {signal : controller.signal}
         );
 
         if (!response.ok) throw new Error("Something went wrong");
@@ -34,8 +36,13 @@ export default function App() {
         if (data.Response === "False") throw new Error("Movie not found");
 
         setMovies(data.Search);
+        setError("");
       } catch (err) {
-        setError(err.message);
+
+        if(err.name !== "AbortError"){
+          setError(err.message);
+        }
+
       } finally {
         setIsLoader(false);
       }
@@ -47,8 +54,15 @@ export default function App() {
       return;
     }
 
+    setSelectedId(null);
     fetchMovie();
+
+    return function(){
+      controller.abort();
+    }
+
   }, [query]);
+
 
   function handleAddWatchList(movie){
     setWatched(watched => [...watched, movie]);
@@ -117,13 +131,10 @@ function Movie({ movies, setSelectedId }) {
 function MovieDetails({ selectedId, setSelectedId, handleAddWatchList, watched }) {
   const [movie, setMovie] = useState({});
   const [userRating, setUserRating] = useState(0);
-  const [detailsError, setDetailsError] = useState("");
   const [isLoader, setIsLoader] = useState(false);
 
   const isWatched = watched.map(watched => watched.imdbID).includes(selectedId);
   const watchedUserRating = watched.find(watched => watched.imdbID === selectedId)?.userRating;
-
-  console.log(isWatched[0]);
 
   const {
     Title: title,
@@ -165,7 +176,22 @@ function MovieDetails({ selectedId, setSelectedId, handleAddWatchList, watched }
     return function(){
       document.title = "usePopcorn";
     }
-  }, [title])
+  }, [title]);
+
+  
+  useEffect(() => {
+    function callback(e){
+        if(e.code === "Escape"){
+          setSelectedId(null);
+          console.log("back")
+        }
+    }
+    document.addEventListener("keydown", callback);
+    return function(){
+      document.removeEventListener("keydown", callback);
+    }
+  }, []);
+
 
   function handleAddMovieWatch(){
     const newWatchMovie = {
