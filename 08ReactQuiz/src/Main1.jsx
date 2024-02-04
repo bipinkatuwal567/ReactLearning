@@ -1,10 +1,9 @@
 import React from 'react'
 
-export const Main1 = () => {
+export const Main1 = ({children}) => {
   return (
     <main className='main'>
-        <p>1/15</p>
-        <p>Questions?</p>
+      {children}
     </main>
   )
 }
