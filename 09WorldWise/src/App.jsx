@@ -1,5 +1,4 @@
 import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
-import { useEffect, useState } from "react";
 
 import Home from "./pages/Home";
 import Product from "./pages/Product";
@@ -12,10 +11,12 @@ import CountryList from "./components/CountryList";
 import City from "./components/City";
 import Form from "./components/Form";
 import { CitiesProvider } from "./contexts/CitiesContext";
+import { AuthProvider } from "./contexts/FakeAuthContext";
 
 function App() {
   return (
-    <CitiesProvider>
+    <AuthProvider>
+      <CitiesProvider>
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Home />} />
@@ -34,6 +35,7 @@ function App() {
         </Routes>
       </BrowserRouter>
     </CitiesProvider>
+    </AuthProvider>
   );
 }
 
