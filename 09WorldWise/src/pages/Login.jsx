@@ -8,7 +8,6 @@ import Message from "../components/Message";
 
 export default function Login() {
   const {login, isAuthenticated, wrongCredential} = useAuth();
-  console.log(wrongCredential);
   const navigate = useNavigate();
 
   // PRE-FILL FOR DEV PURPOSES
