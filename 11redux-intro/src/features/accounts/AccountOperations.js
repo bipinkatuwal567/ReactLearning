@@ -22,7 +22,7 @@ function AccountOperations() {
 
     dispatch(deposit(depositAmount, currency));
     setDepositAmount("");
-    setCurrency("");
+    // setCurrency("");
   }
 
   function handleWithdrawal() {
