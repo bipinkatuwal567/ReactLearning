@@ -1,4 +1,6 @@
-function Home() {
+import React from 'react'
+
+export default function Home() {
   return (
     <div>
       <h1>
@@ -7,7 +9,6 @@ function Home() {
         Straight out of the oven, straight to you.
       </h1>
     </div>
-  );
+  )
 }
 
-export default Home;

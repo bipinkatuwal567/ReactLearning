@@ -1,4 +1,5 @@
 // Test ID: IIDSAT
+import React from "react";
 
 import {
   calcMinutesLeft,
