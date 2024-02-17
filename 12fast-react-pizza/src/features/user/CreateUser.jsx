@@ -1,3 +1,4 @@
+import React from 'react';
 import { useState } from 'react';
 
 function CreateUser() {
@@ -9,13 +10,16 @@ function CreateUser() {
 
   return (
     <form onSubmit={handleSubmit}>
-      <p>👋 Welcome! Please start by telling us your name:</p>
+      <p className="mb-2 text-sm md:text-base">
+        👋 Welcome! Please start by telling us your name:
+      </p>
 
       <input
         type="text"
         placeholder="Your full name"
         value={username}
         onChange={(e) => setUsername(e.target.value)}
+        className="w-56 px-2 py-1 sm:w-72"
       />
 
       {username !== '' && (

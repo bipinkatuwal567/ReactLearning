@@ -1,14 +1,18 @@
-import React from 'react'
+import React from 'react';
+import CreateUser from '../features/user/CreateUser';
 
 export default function Home() {
   return (
-    <div>
-      <h1>
+    <div className='text-center m-10 sm:m-16'>
+      <h1 className="font-semibold mb-8">
         The best pizza.
         <br />
+        <span className='text-yellow-500'>
         Straight out of the oven, straight to you.
-      </h1>
-    </div>
-  )
-}
+        </span>
 
+      </h1>
+        <CreateUser />
+    </div>
+  );
+}
