@@ -1,9 +1,9 @@
-import React from 'react'
+import React from 'react';
 
 export default function Username() {
   return (
-    <div className='text-semibold text-sm'>
-        <p>John</p>
+    <div className="text-semibold hidden text-base font-semibold uppercase md:block">
+      <p>John</p>
     </div>
-  )
+  );
 }
