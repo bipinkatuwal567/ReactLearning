@@ -5,15 +5,14 @@ import CartItem from './CartItem';
 import { useDispatch, useSelector } from 'react-redux';
 import { clearCart, getCart } from './cartSlice';
 import EmptyCart from './EmptyCart';
-import DeleteItem from './DeleteItem';
 
 function Cart() {
-  const username = useSelector(state => state.user.username);
+  const username = useSelector((state) => state.user.username);
   const cart = useSelector(getCart);
 
   const dispatch = useDispatch();
 
-  if(cart.length === 0) return <EmptyCart />
+  if (cart.length === 0) return <EmptyCart />;
 
   return (
     <div>
@@ -26,13 +25,14 @@ function Cart() {
           <CartItem item={item} key={item.pizzaId} />
         ))}
       </ul>
-      
+
       <div className="mt-6 space-x-2">
         <Button type="primary" to="/order/new">
           Order pizzas
         </Button>
-        {/* <button>Clear cart</button> */}
-        <Button onClick={() => dispatch(clearCart())} type="secondary">Clear cart</Button>
+        <Button onClick={() => dispatch(clearCart())} type="secondary">
+          Clear cart
+        </Button>
       </div>
     </div>
   );
