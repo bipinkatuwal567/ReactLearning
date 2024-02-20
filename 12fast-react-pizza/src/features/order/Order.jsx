@@ -9,6 +9,7 @@ import {
 import { getOrder } from '../../services/apiRestaurant';
 import { useFetcher, useLoaderData } from 'react-router-dom';
 import OrderItem from './OrderItem';
+import UpdateOrder from './UpdateOrder';
 
 function Order() {
   const fetcher = useFetcher();
@@ -29,7 +30,6 @@ function Order() {
     if (!fetcher.data && fetcher.state === 'idle') fetcher.load('/menu');
   }, [fetcher]);
 
-  console.log(fetcher.data);
 
   return (
     <div className="space-y-8">
@@ -85,6 +85,8 @@ function Order() {
           To pay on delivery: {formatCurrency(orderPrice + priorityPrice)}
         </p>
       </div>
+
+      {!priority && <UpdateOrder order={order} /> }
     </div>
   );
 }
