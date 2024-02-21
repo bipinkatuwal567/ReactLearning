@@ -1,3 +1,4 @@
+import React from "react";
 import Heading from "../ui/Heading";
 
 function NewUsers() {
