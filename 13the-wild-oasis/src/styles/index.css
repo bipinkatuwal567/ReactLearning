@@ -79,6 +79,10 @@
   transition: background-color 0.3s, border 0.3s;
 }
 
+body::-webkit-scrollbar {
+  display: none;
+}
+
 html {
   font-size: 62.5%;
 }
