@@ -1,5 +1,7 @@
-function Empty({ resource }) {
-  return <p>No {resource} could be found.</p>;
+import React from "react";
+
+function Empty({ resourceName }) {
+  return <p>No {resourceName} could be found.</p>;
 }
 
 export default Empty;
