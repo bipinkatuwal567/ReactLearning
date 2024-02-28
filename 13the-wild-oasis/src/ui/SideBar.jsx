@@ -21,7 +21,7 @@ export default function SideBar() {
         <Logo />
         <MainNav />
 
-        <Uploader />
+        {/* <Uploader /> */}
     </StyledSideBar>
   )
 }
