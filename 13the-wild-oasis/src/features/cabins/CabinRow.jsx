@@ -11,7 +11,6 @@ import Modal from "../../ui/Modal";
 import ConfirmDelete from "../../ui/ConfirmDelete";
 import Table from "../../ui/Table";
 import Menus from "../../ui/Menus";
-import { deleteCabin } from "../../services/apiCabins";
 
 const Img = styled.img`
   display: block;
@@ -41,8 +40,8 @@ const Discount = styled.div`
 `;
 
 export default function CabinRow({ cabin }) {
-  const { isDeleting, mutateDelete } = useDeleteCabin();
-  const { isCreating, createMutate } = useCreateCabin();
+  const { isDeleting, deleteCabin } = useDeleteCabin();
+  const { isCreating, createCabin } = useCreateCabin();
 
   const {
     id: cabinId,
@@ -55,7 +54,7 @@ export default function CabinRow({ cabin }) {
   } = cabin;
 
   function handleDuplicate() {
-    createMutate({
+    createCabin({
       name: `copy of ${name}`,
       maxCapacity,
       regularPrice,
@@ -87,6 +86,7 @@ export default function CabinRow({ cabin }) {
                 <Menus.Button
                   icon={<HiSquare2Stack />}
                   onClick={handleDuplicate}
+                  disabled={isCreating}
                 >
                   Duplicate
                 </Menus.Button>
@@ -101,7 +101,7 @@ export default function CabinRow({ cabin }) {
               </Menus.List>
 
               <Modal.Window name="edit">
-                <CreateCabinForm disabled={isCreating} cabinToEdit={cabin} />
+                <CreateCabinForm cabinToEdit={cabin} />
               </Modal.Window>
 
               <Modal.Window name="delete">

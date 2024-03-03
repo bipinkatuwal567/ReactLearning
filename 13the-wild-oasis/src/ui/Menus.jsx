@@ -1,8 +1,8 @@
-import React, { createContext, useContext, useState } from "react";
+import { createContext, useContext, useState } from "react";
 import { createPortal } from "react-dom";
 import { HiEllipsisVertical } from "react-icons/hi2";
 import styled from "styled-components";
-import useOutsideClick from "../hooks/useOutsideClick";
+import { useOutsideClick } from "../hooks/useOutsideClick";
 
 const Menu = styled.div`
   display: flex;
@@ -69,7 +69,7 @@ const MenusContext = createContext();
 
 function Menus({ children }) {
   const [openId, setOpenId] = useState("");
-  const [position, setPosition] = useState();
+  const [position, setPosition] = useState(null);
 
   const close = () => setOpenId("");
   const open = setOpenId;
@@ -84,7 +84,7 @@ function Menus({ children }) {
 }
 
 function Toggle({ id }) {
-  const { openId, open, close, setPosition } = useContext(MenusContext);
+  const { openId, close, open, setPosition } = useContext(MenusContext);
 
   function handleClick(e) {
     e.stopPropagation();
@@ -93,7 +93,8 @@ function Toggle({ id }) {
     setPosition({
       x: window.innerWidth - rect.width - rect.x,
       y: rect.y + rect.height + 8,
-    })
+    });
+
     openId === "" || openId !== id ? open(id) : close();
   }
 
@@ -104,21 +105,24 @@ function Toggle({ id }) {
   );
 }
 
-function List({ children, id }) {
-  const { openId, close, position } = useContext(MenusContext);
+function List({ id, children }) {
+  const { openId, position, close } = useContext(MenusContext);
   const ref = useOutsideClick(close, false);
 
   if (openId !== id) return null;
 
   return createPortal(
-    <StyledList position={position} ref={ref}>{children}</StyledList>,
+    <StyledList position={position} ref={ref}>
+      {children}
+    </StyledList>,
     document.body
   );
 }
 
 function Button({ children, icon, onClick }) {
+  const { close } = useContext(MenusContext);
 
-  function handleClick(){
+  function handleClick() {
     onClick?.();
     close();
   }
@@ -128,7 +132,7 @@ function Button({ children, icon, onClick }) {
       <StyledButton onClick={handleClick}>
         {icon}
         <span>{children}</span>
-        </StyledButton>
+      </StyledButton>
     </li>
   );
 }

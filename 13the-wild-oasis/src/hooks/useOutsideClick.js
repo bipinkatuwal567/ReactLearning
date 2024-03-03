@@ -1,6 +1,6 @@
-import React, { useEffect, useRef } from "react";
+import { useEffect, useRef } from "react";
 
-export default function useOutsideClick(close, listenCapture = true) {
+function useOutsideClick(close, listenCapture = true) {
     const ref = useRef();
 
   useEffect(() => {
@@ -21,3 +21,5 @@ export default function useOutsideClick(close, listenCapture = true) {
 
   return ref;
 }
+
+export {useOutsideClick}

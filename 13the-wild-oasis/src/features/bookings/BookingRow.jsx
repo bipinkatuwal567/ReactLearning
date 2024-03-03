@@ -2,7 +2,6 @@ import styled from "styled-components";
 import { format, isToday } from "date-fns";
 import { useNavigate } from "react-router-dom";
 import {
-  HiArchiveBox,
   HiArrowDownOnSquare,
   HiArrowUpOnSquare,
   HiEye,
@@ -72,8 +71,6 @@ function BookingRow({
     "checked-out": "silver",
   };
 
-  if (isCheckingOut || isDeleting) return <Spinner />;
-
   return (
     <Table.Row>
       <Cabin>{cabinName}</Cabin>
@@ -123,6 +120,7 @@ function BookingRow({
               <Menus.Button
                 icon={<HiArrowUpOnSquare />}
                 onClick={() => checkout(bookingId)}
+                disabled={isCheckingOut}
               >
                 Checkout
               </Menus.Button>
