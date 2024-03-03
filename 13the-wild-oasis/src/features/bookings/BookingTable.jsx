@@ -10,8 +10,8 @@ function BookingTable() {
   const {isLoading: isBookings, bookings, count} = useBookings();
 
   if(isBookings) return <Spinner />
-
   if(!bookings.length) return <Empty resourceName="bookings" />
+
 
   return (
     <Menus>

@@ -13,7 +13,6 @@ import Table from "../../ui/Table";
 import Menus from "../../ui/Menus";
 import { deleteCabin } from "../../services/apiCabins";
 
-
 const Img = styled.img`
   display: block;
   width: 6.4rem;
