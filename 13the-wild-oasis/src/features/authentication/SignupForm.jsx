@@ -27,6 +27,7 @@ function SignupForm() {
         <Input
           type="text"
           id="fullName"
+          disabled={isLoading}
           {...register("fullName", {
             required: "This field is required",
           })}
@@ -37,6 +38,7 @@ function SignupForm() {
         <Input
           type="email"
           id="email"
+          disabled={isLoading}
           {...register("email", {
             required: "This field is required",
             pattern: {
@@ -54,6 +56,7 @@ function SignupForm() {
         <Input
           type="password"
           id="password"
+          disabled={isLoading}
           {...register("password", {
             required: "This field is required",
             minLength: {
@@ -67,6 +70,7 @@ function SignupForm() {
       <FormRow label="Repeat password" errors={errors?.passwordConfirm?.message}>
         <Input
           type="password"
+          disabled={isLoading}
           id="passwordConfirm"
           {...register("passwordConfirm", {
             required: "This field is required",
@@ -78,10 +82,10 @@ function SignupForm() {
 
       <FormRow>
         {/* type is an HTML attribute! */}
-        <Button variation="secondary" onClick={reset} type="reset">
+        <Button variation="secondary" onClick={reset} disabled={isLoading} type="reset">
           Cancel
         </Button>
-        <Button>Create new user</Button>
+        <Button disabled={isLoading}>Create new user</Button>
       </FormRow>
     </Form>
   );
